@@ -24,16 +24,42 @@ namespace ECommerceAPI.Persistence.Repositories
 
         public DbSet<T> Table => _context.Set<T>(); // Dbset T türünde entity alacaktır. T yerine hangi entity gelirse o entity'e ait tabloyu bizlere verecektir.
 
-        public IQueryable<T> GetAll() => Table; // Direkt olarak table getirirsek bütün verileri getirmiş oluruz.
-        
+        public IQueryable<T> GetAll(bool tracking = true) // Direkt olarak table getirirsek bütün verileri getirmiş oluruz.
+        {
+            var query = Table.AsQueryable();
+            //Burada tracking işlemini kapatarak gereksiz bir maliyetten kurtuluyoruz.
+            if (!tracking)
+                query = query.AsNoTracking();
+            return query;
+        }  
 
-        public async Task<T> GetByIdAsync(string id) => await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id)); //Reflection yerine BaseEntity işaretleyici türünden istifade ederek BaseEntity içinde olan Id ile parametre olarak gelen id'yi sorguluyoruz.
-        
+        public async Task<T> GetByIdAsync(string id, bool tracking = true)        // => await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
+        {
+            var query = Table.AsQueryable();
+            if(!tracking)
+                query = query.AsNoTracking();
+            return await query.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
+            //await query.FindAsync(Guid.Parse(id)); -> Burada bunu kullanamayız. Çünkü query de FindAsync metodu yoktur. Bu yüzden marker kullanarak baseEntity üzerinden bulma işlemini gerçekleştiririz.
 
-        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method) => await Table.FirstOrDefaultAsync(method);
-        
+        }
+        //Reflection yerine BaseEntity işaretleyici (marker) türünden istifade ederek BaseEntity içinde olan Id ile parametre olarak gelen id'yi sorguluyoruz.
 
-        public IQueryable<T> GetWhere(Expression<Func<T, bool>> method) => Table.Where(method);
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)
+        {
+            var query = Table.AsQueryable();
+            if (!tracking)
+                query = Table.AsNoTracking();
+            return await query.FirstOrDefaultAsync(method);
+        } 
+
+        public IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true)
+        {
+           var query = Table.Where(method);
+            if(!tracking)
+                query = query.AsNoTracking();
+            return query;
+        }
         
+        // Yapılan değişiklikler tracking mekanizması kapalıysa(false ise) veritabanına kaydedilmez. 
     }
 }

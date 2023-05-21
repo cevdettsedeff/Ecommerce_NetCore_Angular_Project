@@ -13,17 +13,23 @@ namespace ECommerceAPI.Persistence
 {
     public static class ServiceRegistration
     {
-        // burası bizim IoC konteynırımızdır.
+        // Burası bizim IoC konteynırımızdır.
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<ECommerceAPIDbContext>(options => options.UseNpgsql(Configuration.ConnectionString), ServiceLifetime.Singleton);
+            services.AddDbContext<ECommerceAPIDbContext>(options => options.UseNpgsql(Configuration.ConnectionString));
 
-            services.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
-            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
-            services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
-            services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
-            services.AddSingleton<IProductReadRepository, ProductReadRepository>();
-            services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+
+            //Singleton yaşam döngüsünde nesne bir defa oluşturulur ve hep kullanılır.
+            //Scoped yaşam döngüsünde gelen isteğe tek bir nesne döner ve sonunda expose edilir.
+            //Transient yaşam döngüsünde ise bir nesne bir defa kullanılır ve expose edilir. Yeni talep gelirse tekrardan yeni bir nesne oluşturulur.
+
+            //Buradaki örnekte scoped kullanmak en doğrusudur. Zaten DbContext default olarak Scoped yaşam döngüsündedir.
         }
     }
 }
