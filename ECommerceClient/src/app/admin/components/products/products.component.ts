@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+// import { Create_Product } from 'src/app/contracts/create_product';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 
 @Component({
@@ -15,11 +16,11 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
     ngOnInit(): void {
-      this.showSpinner(SpinnerType.SquareJellyBox);
+      // this.showSpinner(SpinnerType.SquareJellyBox);
 
-      this.httpClientService.get({
-        controller: "products"
-      }).subscribe(data => console.log(data));
+      // this.httpClientService.get<Product[]>({
+      //   controller: "products"
+      // }).subscribe(data => console.log(data))};
       
       // this.httpClientService.post({
       //   controller:"products",
@@ -50,4 +51,4 @@ export class ProductsComponent extends BaseComponent implements OnInit {
       // }, "id değeri").subscribe();
 
     }
-}
+  }

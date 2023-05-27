@@ -54,7 +54,7 @@ export class HttpClientService {
     else
       url = `${this.url(requestParameter)}/${id}`;
 
-      this.httpClient.delete<T>(url, { headers: requestParameter.headers });
+      return this.httpClient.delete<T>(url, { headers: requestParameter.headers });
   }
 
 
