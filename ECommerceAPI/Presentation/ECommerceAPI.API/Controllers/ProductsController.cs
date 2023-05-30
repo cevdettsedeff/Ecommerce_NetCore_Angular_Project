@@ -36,6 +36,11 @@ namespace ECommerceAPI.API.Controllers
         public async Task<IActionResult> Post(ViewModel_Create_Product model)
         {
             // Dışarıdan gelen bir veri, Entity ile karşılanmaz. Bunun yerine ViewModel'ler kullanılabilir.
+
+            if (ModelState.IsValid)
+            {
+
+            }
             await _productWriteRepository.AddAsync(new()
             {
                 Name=model.Name,
