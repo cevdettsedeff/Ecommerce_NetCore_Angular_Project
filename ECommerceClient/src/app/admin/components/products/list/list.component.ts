@@ -8,6 +8,7 @@ import { AlertifyService, MessageType, Position } from 'src/app/services/admin/a
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 declare var $: any;
+// jquery dahil edildi.
 
 @Component({
   selector: 'app-list',
@@ -23,7 +24,7 @@ export class ListComponent extends BaseComponent  implements OnInit{
     super(spinner)
   }
 
-  displayedColumns: string[] = ['name','stock','price','createdDate','updatedDate']
+  displayedColumns: string[] = ['name','stock','price','createdDate','updatedDate','edit','delete']
 
   dataSource:MatTableDataSource<List_Product> = null;
 
