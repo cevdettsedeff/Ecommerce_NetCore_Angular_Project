@@ -13,16 +13,16 @@ export class AppComponent {
   title = 'ECommerceClient';
 
   constructor(private toastrService: CustomToastrService){
-    toastrService.message("Hoşgeldiniz!","E-Ticaret", {
-      messageType: ToastrMessageType.Success,
-      position: ToastrPosition.BottomFullWidth
-    });
+    // toastrService.message("Hoşgeldiniz!","E-Ticaret", {
+    //   messageType: ToastrMessageType.Success,
+    //   position: ToastrPosition.BottomFullWidth
+    // });
 
-    toastrService.message("Hoşgeldiniz!","E-Ticaret", {
-      messageType: ToastrMessageType.Error,
-      position: ToastrPosition.TopFullWidth
-    });
-  };
+    // toastrService.message("Hoşgeldiniz!","E-Ticaret", {
+    //   messageType: ToastrMessageType.Error,
+    //   position: ToastrPosition.TopFullWidth
+    // });
+  }
 
 
   }

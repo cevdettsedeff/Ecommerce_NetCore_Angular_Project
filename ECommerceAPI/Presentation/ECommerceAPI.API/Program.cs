@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPersistenceServices();
 
 // CORS kullanýrken nereden gelen istekleri kabul edeceðimize WithOrigins ile karar verebiliyoruz.
-builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("https://localhost:4200").AllowAnyHeader()));
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 
 // Fluent Validation kullanmak için alttaki gibi kodu ekliyoruz. Sadece CreateProduct eklememize raðmen o klasör içindeki tüm validatorler geçerli olacaktýr.
 
