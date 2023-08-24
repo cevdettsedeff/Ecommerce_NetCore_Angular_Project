@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
 app.UseCors(); //Yukarýda uygulanan cors politikalarý için middleware eklemesini yapýyoruz.
 
 app.UseHttpsRedirection();

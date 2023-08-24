@@ -25,6 +25,7 @@ import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dial
     ListComponent,
     DeleteDirective,
     DeleteDialogComponent
+    
   ],
   imports: [
     CommonModule,
