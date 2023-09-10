@@ -30,6 +30,13 @@ namespace ECommerceAPI.Persistence
             //Transient yaşam döngüsünde ise bir nesne bir defa kullanılır ve expose edilir. Yeni talep gelirse tekrardan yeni bir nesne oluşturulur.
 
             //Buradaki örnekte scoped kullanmak en doğrusudur. Zaten DbContext default olarak Scoped yaşam döngüsündedir.
+
+            services.AddScoped<IFileReadRepository, FileReadRepository>();
+            services.AddScoped<IFileReadRepository, FileReadRepository>();
+            services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
+            services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
+            services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
+            services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
         }
     }
 }
